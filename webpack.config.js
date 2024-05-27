@@ -1,33 +1,51 @@
 const path = require('path')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-module.exports = {
-    mode: 'development',
-    entry: './src/app.js',
-    output: {
-        path: path.join(__dirname, 'public'),
-        filename: 'bundle.js'
-    },
-    module: {
-        rules: [{
-            loader: 'babel-loader',
-            test: /\.js$/,
-            exclude: /node_modules/
-        }, {
-            use: [
-                'style-loader',
-                'css-loader',
-                'sass-loader'
-            ],
-            test: /\.s?css$/
-        }
-    
-    ]
-    },
-    devtool:'eval-cheap-module-source-map',
-    devServer: {
-        static: {
-            directory: path.join(__dirname, 'public'),
+module.exports = (env) => {
+    return {
+        mode: env.production ? 'production' : 'development',
+        entry: './src/app.js',
+        output: {
+            path: path.join(__dirname, 'public'),
+            filename: 'bundle.js'
         },
-        historyApiFallback: true
+        plugins: [new MiniCssExtractPlugin({
+            filename: 'styles.css',
+            chunkFilename: '[id].[contenthash].css'
+        })],
+        module: {
+            rules: [{
+                loader: 'babel-loader',
+                test: /\.js$/,
+                exclude: /node_modules/
+            }, {
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    }
+                ],
+                test: /\.s?css$/,
+                
+            }
+        
+        ]
+        },
+        devtool: env.production ? 'source-map' :'inline-source-map',
+        devServer: {
+            static: {
+                directory: path.join(__dirname, 'public'),
+            },
+            historyApiFallback: true
+        }
     }
 }
