@@ -6,8 +6,9 @@ module.exports = (env) => {
         mode: env.production ? 'production' : 'development',
         entry: './src/app.js',
         output: {
-            path: path.join(__dirname, 'public'),
-            filename: 'bundle.js'
+            path: path.join(__dirname, 'public', 'dist'),
+            filename: 'bundle.js',
+            publicPath: '/dist/'
         },
         plugins: [new MiniCssExtractPlugin({
             filename: 'styles.css',
@@ -43,9 +44,9 @@ module.exports = (env) => {
         devtool: env.production ? 'source-map' :'inline-source-map',
         devServer: {
             static: {
-                directory: path.join(__dirname, 'public'),
+                directory: path.join(__dirname, 'public')
             },
-            historyApiFallback: true
+            historyApiFallback: true,
         }
     }
 }
