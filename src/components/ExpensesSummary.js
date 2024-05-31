@@ -8,6 +8,7 @@ const ExpenseSummary = () => {
 const store = useStore().getState()
 const expenseCount = filteredExpenses(store.expenses, store.filters)
 const total = expensesTotal(expenseCount)
+const formattedTotal = numeral(total / 100).format('$0,0.00')
 // const countFun = () => {
 //     if(expenseCount.length === 1) {
 
@@ -16,7 +17,7 @@ const total = expensesTotal(expenseCount)
 return (
     <div>
       {expenseCount.length > 0 && (
-        expenseCount.length === 1 ? <p>Viewing {expenseCount.length} expense totalling {numeral(total / 100).format('$0,0.00')}</p> : <p>Viewing {expenseCount.length} expenses totalling {numeral(total / 100).format('$0,0.00')}</p>
+        expenseCount.length === 1 ? <p>Viewing {expenseCount.length} expense totalling {formattedTotal}</p> : <p>Viewing {expenseCount.length} expenses totalling {formattedTotal}</p>
       )}
     </div>
 )
