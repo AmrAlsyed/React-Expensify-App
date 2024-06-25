@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid';
-import { database, push, ref, get } from '../firebase/firebase';
+import { database, push, ref, get, remove} from '../firebase/firebase';
 // Add expense Action Generator
 export const addExpense = (expense) => ({
     type: 'ADD_EXPENSE',
@@ -30,6 +30,14 @@ export const removeExpense = ({id}) => ({
     type: 'REMOVE_EXPENSE',
     id
 })
+
+export const startRemoveExpense = ({id}) => {
+return async (dispatch) => {
+    await remove(ref(database, 'expenses/' + id))
+
+    dispatch(removeExpense(id))
+}
+}
 
 export const editExpense= (id, updates) => ({
     type: 'EDIT_EXPENSE',
