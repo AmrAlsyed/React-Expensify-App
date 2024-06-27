@@ -17,12 +17,12 @@ const EditExpensePage = () => {
                 expense={expenseToEdit}
                 onSubmit={(expense) => {
                     dispatch(startEditExpense(expenseToEdit.id, expense))
-                    history.push('/')
+                    history.push('/dashboard')
                 }}
              />
              <button onClick={() => {
                 dispatch(startRemoveExpense({id: expenseToEdit.id}))
-                history.push('/')
+                history.push('/dashboard')
              }}>Remove</button>
         </div>
     );
