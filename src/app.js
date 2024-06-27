@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-import AppRouter from './routers/AppRouter';
+import AppRouter, {history} from './routers/AppRouter';
 import configureStore from './store/configureStore';
 import { startSetExpenses } from './actions/expenses';
+import { auth } from './firebase/firebase';
+import { login, logout } from './actions/auth';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
-import './firebase/firebase';
+
 
 const store = configureStore();
 
@@ -16,6 +18,7 @@ const jsx = (
     </Provider>
 );
 
+
 // Create the root once
 const root = ReactDOM.createRoot(document.getElementById('app'));
 
@@ -23,6 +26,21 @@ const root = ReactDOM.createRoot(document.getElementById('app'));
 root.render(<p>Loading...</p>);
 
 // Dispatch the async action and then render the main app
-store.dispatch(startSetExpenses()).then(() => {
-    root.render(jsx);
-});
+
+
+auth.onAuthStateChanged((user) => {
+    if(user) {
+        store.dispatch(login(user.uid))
+        store.dispatch(startSetExpenses()).then(() => {
+            root.render(jsx);
+            if (history.location.pathname === '/') {
+                history.push('/dashboard')
+            }
+        });
+
+    } else {
+        store.dispatch(logout())
+        history.push('/')
+        root.render(jsx);
+    }
+})

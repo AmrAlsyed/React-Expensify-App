@@ -1,6 +1,7 @@
 // import * as firebase from 'firebase'
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, set, update, remove, get, onValue, off, push, onChildAdded } from "firebase/database";
+import { getDatabase, ref, set, update, remove, get, onValue, off, push, onChildAdded} from "firebase/database";
+import { getAuth, GoogleAuthProvider} from "firebase/auth";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAle97NZICgrSa8Fs6vZJ0O-9hu2SLKJ3Y",
@@ -14,10 +15,10 @@ const firebaseConfig = {
 
   const app = initializeApp(firebaseConfig);
   const database = getDatabase(app);
+  const auth = getAuth(app);
+  const googleAuthProvider = new GoogleAuthProvider();
 
-  
-
-  export {app , push, database, ref, get, remove, update}
+  export {app , push, database, ref, get, remove, update, googleAuthProvider, auth}
 
   
   // onChildAdded(ref(database, 'expenses'), (snapshot) => {

@@ -1,12 +1,11 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import ExpenseForm from "./ExpenseForm";
 import { startAddExpense } from "../actions/expenses";
+import { history } from "../routers/AppRouter";
 
 
 const AddExpensePage = (props) => {
-    const navigate = useNavigate();
     const dispatch = useDispatch()
     return (
         <div>
@@ -14,7 +13,7 @@ const AddExpensePage = (props) => {
         <ExpenseForm
         onSubmit={(expense) => {
             dispatch(startAddExpense(expense));
-            navigate('/')
+            history.push('/')
 
         }}
          />
