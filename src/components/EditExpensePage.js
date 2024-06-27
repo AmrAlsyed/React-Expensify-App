@@ -1,21 +1,23 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch} from "react-redux";
-import { editExpense , startRemoveExpense} from "../actions/expenses";
+import { startEditExpense , startRemoveExpense, setExpenses} from "../actions/expenses";
 import { useNavigate } from "react-router-dom";
 import ExpenseForm from "./ExpenseForm";
 
 const EditExpensePage = () => {
+    const { id } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const expenses = useSelector((state) => state.expenses)
-    const expenseToEdit = expenses.find((expense) => expense.id === useParams().id)
+    const expenseToEdit = useSelector((state) => 
+        state.expenses.find((expense) => expense.id === id)
+    );
     return (
         <div>
             <ExpenseForm
                 expense={expenseToEdit}
                 onSubmit={(expense) => {
-                    dispatch(editExpense(expenseToEdit.id, expense))
+                    dispatch(startEditExpense(expenseToEdit.id, expense))
                     navigate('/')
                 }}
              />

@@ -17,7 +17,7 @@ const firebaseConfig = {
 
   
 
-  export {app , push, database, ref, get, remove}
+  export {app , push, database, ref, get, remove, update}
 
   
   // onChildAdded(ref(database, 'expenses'), (snapshot) => {
