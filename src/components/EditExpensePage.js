@@ -13,17 +13,24 @@ const EditExpensePage = () => {
     );
     return (
         <div>
-            <ExpenseForm
+         <div className="page-header">
+            <div className="content-container">
+                <h1 className="page-header__title">Edit Expense</h1>
+            </div>
+         </div>
+        <div className="content-container">
+        <ExpenseForm
                 expense={expenseToEdit}
                 onSubmit={(expense) => {
                     dispatch(startEditExpense(expenseToEdit.id, expense))
                     history.push('/dashboard')
                 }}
              />
-             <button onClick={() => {
+             <button className="button button--secondary" onClick={() => {
                 dispatch(startRemoveExpense({id: expenseToEdit.id}))
                 history.push('/dashboard')
-             }}>Remove</button>
+             }}>Remove Expense</button>
+        </div>
         </div>
     );
 }
