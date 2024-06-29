@@ -6,6 +6,7 @@ import configureStore from './store/configureStore';
 import { startSetExpenses } from './actions/expenses';
 import { auth } from './firebase/firebase';
 import { login, logout } from './actions/auth';
+import LoadingPage from './components/LoadingPage'
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 
@@ -23,7 +24,7 @@ const jsx = (
 const root = ReactDOM.createRoot(document.getElementById('app'));
 
 // Render a loading message initially
-root.render(<p>Loading...</p>);
+root.render(<LoadingPage />);
 
 // Dispatch the async action and then render the main app
 

@@ -1,18 +1,23 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { startLogout } from "../actions/auth";
 
 const Header = () => {
     const dispatch = useDispatch()
     return (
-        <header>
+        <header className="header">
+        <div className="content-container">
+        <div className="header__content">
+            <Link className="header__title" to={'/dashboard'} >
             <h1>Expensify</h1>
-            <NavLink to={'/dashboard'} >Dashboard</NavLink>
-            <NavLink to={'/create'}>Create Expense</NavLink>
-            <button onClick={() => {
+            </Link>
+            <button className="button button--link" onClick={() => {
                 dispatch(startLogout())
-            }}>Logout</button>
+            }}>Logout</button> 
+        </div>
+
+        </div>
         </header>
     )
 }
