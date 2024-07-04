@@ -27,12 +27,12 @@ The React Expensify App is a web application that allows users to manage their e
    ```
 3. Install dependencies:
    ```bash
-   npm install
+   yarn install
    ```
 4. Set up Firebase:
    - Create a Firebase project in the [Firebase Console](https://console.firebase.google.com/).
    - Add a web app to your Firebase project.
-   - Copy the Firebase config object, create a `.env` file in root directory and paste this:
+   - Copy the Firebase config object, create a `.env` file in root directory and paste this, then replace the values with your firebase database variables:
      ```env
     REACT_APP_FIREBASE_API_KEY=your_api_key
     REACT_APP_FIREBASE_AUTH_DOMAIN=your_auth_domain
@@ -42,12 +42,12 @@ The React Expensify App is a web application that allows users to manage their e
     REACT_APP_FIREBASE_APP_ID=your_app_id
     REACT_APP_FIREBASE_DATABASE_URL=your_database_url
      ```
-
+   
 ## Usage
 
 1. Start the development server:
    ```bash
-   npm start
+   yarn run dev-server
    ```
 2. Open [http://localhost:3000](http://localhost:3000) in your browser to view the app.
 
@@ -57,7 +57,7 @@ The app is hosted on Vercel. To deploy your own version:
 
 1. Install Vercel CLI:
    ```bash
-   npm install -g vercel
+   yarn add -g vercel
    ```
 2. Deploy the app:
    ```bash
